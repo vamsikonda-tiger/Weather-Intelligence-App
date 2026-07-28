@@ -1,0 +1,6 @@
+{
+  "name": "Weather Intelligence App",
+  "description": "Real-time weather forecast, 7-day trends, interactive charts, smart recommendations, and city intelligence.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
