@@ -126,7 +126,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               if (suggestions.length > 0) setIsOpen(true);
             }}
             placeholder="Search city (e.g. San Francisco, Tokyo, London)..."
-            className="w-full pl-12 pr-10 py-3 bg-slate-900/90 border border-slate-800 rounded-full text-slate-100 placeholder-slate-500 text-sm font-medium focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 shadow-md transition-all"
+            className="w-full pl-12 pr-10 py-3 bg-white/80 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-full text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 text-sm font-medium focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 shadow-md transition-all"
           />
 
           {query && (
@@ -163,26 +163,26 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           onClick={onUseLocation}
           disabled={isLocating}
           title="Detect Current Location"
-          className="p-3 bg-slate-900/90 hover:bg-slate-800 text-slate-300 border border-slate-800 rounded-full shadow-md transition-all flex items-center justify-center shrink-0 disabled:opacity-50 cursor-pointer hover:border-indigo-500/40"
+          className="p-3 bg-white/80 dark:bg-slate-900/90 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 rounded-full shadow-md transition-all flex items-center justify-center shrink-0 disabled:opacity-50 cursor-pointer hover:border-indigo-500/40"
         >
           {isLocating ? (
-            <Loader2 className="w-5 h-5 text-indigo-400 animate-spin" />
+            <Loader2 className="w-5 h-5 text-indigo-500 dark:text-indigo-400 animate-spin" />
           ) : (
-            <Locate className="w-5 h-5 text-indigo-400 hover:scale-110 transition-transform" />
+            <Locate className="w-5 h-5 text-indigo-600 dark:text-indigo-400 hover:scale-110 transition-transform" />
           )}
         </button>
 
         {/* Suggestions Dropdown */}
         {isOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl z-50 overflow-hidden divide-y divide-slate-800/60 max-h-64 overflow-y-auto">
+          <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl z-50 overflow-hidden divide-y divide-slate-100 dark:divide-slate-800/60 max-h-64 overflow-y-auto">
             {isLoading && (
-              <div className="p-4 text-center text-xs text-slate-400 flex items-center justify-center gap-2">
-                <Loader2 className="w-4 h-4 animate-spin text-indigo-400" /> Locating cities...
+              <div className="p-4 text-center text-xs text-slate-500 dark:text-slate-400 flex items-center justify-center gap-2">
+                <Loader2 className="w-4 h-4 animate-spin text-indigo-500 dark:text-indigo-400" /> Locating cities...
               </div>
             )}
 
             {!isLoading && searchError && (
-              <div className="p-4 text-center text-xs text-slate-400">{searchError}</div>
+              <div className="p-4 text-center text-xs text-slate-500 dark:text-slate-400">{searchError}</div>
             )}
 
             {!isLoading &&
@@ -191,20 +191,20 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   key={`${city.id}-${city.latitude}`}
                   type="button"
                   onClick={() => handleSelectSuggestion(city)}
-                  className="w-full px-4 py-3 text-left hover:bg-slate-800/80 transition-colors flex items-center justify-between group cursor-pointer"
+                  className="w-full px-4 py-3 text-left hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors flex items-center justify-between group cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
-                    <MapPin className="w-4 h-4 text-indigo-400 group-hover:scale-110 transition-transform" />
+                    <MapPin className="w-4 h-4 text-indigo-500 dark:text-indigo-400 group-hover:scale-110 transition-transform" />
                     <div>
-                      <div className="text-sm font-semibold text-slate-100">
+                      <div className="text-sm font-semibold text-slate-900 dark:text-slate-100">
                         {city.name}
                       </div>
-                      <div className="text-xs text-slate-400">
+                      <div className="text-xs text-slate-500 dark:text-slate-400">
                         {[city.admin1, city.country].filter(Boolean).join(', ')}
                       </div>
                     </div>
                   </div>
-                  <div className="text-[11px] font-mono text-slate-500">
+                  <div className="text-[11px] font-mono text-slate-400 dark:text-slate-500">
                     {city.latitude.toFixed(2)}°, {city.longitude.toFixed(2)}°
                   </div>
                 </button>
@@ -215,7 +215,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
       {/* Quick Pick Popular Cities */}
       <div className="flex items-center gap-2 mt-3 overflow-x-auto pb-1 scrollbar-none">
-        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest shrink-0">
+        <span className="text-[10px] font-bold text-slate-500 dark:text-slate-500 uppercase tracking-widest shrink-0">
           Quick Pick:
         </span>
         <div className="flex items-center gap-1.5 flex-wrap">
@@ -225,7 +225,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               id={`quick-city-${city.name.toLowerCase().replace(/\s+/g, '-')}`}
               type="button"
               onClick={() => handlePopularCityClick(city)}
-              className="px-3 py-1 text-xs font-semibold bg-slate-900/80 hover:bg-indigo-600/30 hover:border-indigo-500/50 text-slate-300 hover:text-white rounded-full border border-slate-800 transition-all cursor-pointer"
+              className="px-3 py-1 text-xs font-semibold bg-white/80 dark:bg-slate-900/80 hover:bg-indigo-50 dark:hover:bg-indigo-600/30 hover:border-indigo-500/50 text-slate-700 dark:text-slate-300 hover:text-indigo-900 dark:hover:text-white rounded-full border border-slate-200 dark:border-slate-800 transition-all cursor-pointer"
             >
               {city.name}
             </button>

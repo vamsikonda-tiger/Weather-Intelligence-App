@@ -21,10 +21,30 @@ const DEFAULT_CITY = {
 };
 
 export default function App() {
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    const saved = localStorage.getItem('weather_theme');
+    if (saved === 'light') return false;
+    if (saved === 'dark') return true;
+    return true;
+  });
+
   const [unit, setUnit] = useState<TemperatureUnit>(() => {
     const saved = localStorage.getItem('weather_temp_unit');
     return (saved === 'fahrenheit' ? 'fahrenheit' : 'celsius') as TemperatureUnit;
   });
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('weather_theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
+
+  const handleToggleTheme = () => {
+    setIsDark((prev) => !prev);
+  };
 
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -146,12 +166,14 @@ export default function App() {
     : [];
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-100 selection:bg-indigo-500 selection:text-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         {/* Header Navigation */}
         <Header
           unit={unit}
           onToggleUnit={handleToggleUnit}
+          theme={isDark ? 'dark' : 'light'}
+          onToggleTheme={handleToggleTheme}
           onRefresh={() =>
             loadWeather(
               currentCity.lat,

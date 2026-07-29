@@ -138,99 +138,99 @@ export const CurrentWeatherCard: React.FC<CurrentWeatherCardProps> = ({ data, un
       {/* Secondary Bento Metric Cards (Spans 5 cols on LG) */}
       <div className="lg:col-span-5 grid grid-cols-2 gap-4">
         {/* Humidity Bento Card */}
-        <div className="p-5 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-[2rem] shadow-lg flex flex-col justify-between hover:border-indigo-500/40 transition-all">
+        <div className="p-5 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-lg flex flex-col justify-between hover:border-indigo-500/40 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Humidity</span>
-            <div className="w-8 h-8 rounded-xl bg-sky-500/15 flex items-center justify-center text-sky-400">
+            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Humidity</span>
+            <div className="w-8 h-8 rounded-xl bg-sky-500/15 flex items-center justify-center text-sky-600 dark:text-sky-400">
               <Droplets className="w-4 h-4" />
             </div>
           </div>
           <div className="my-3">
-            <div className="text-3xl font-black text-white">{current.humidity}%</div>
-            <p className="text-[11px] text-slate-400 font-medium mt-1">
+            <div className="text-3xl font-black text-slate-900 dark:text-white">{current.humidity}%</div>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-1">
               {current.humidity > 70 ? 'High Moisture' : current.humidity < 30 ? 'Dry Air' : 'Optimal Balance'}
             </p>
           </div>
-          <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+          <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
             <div
-              className="bg-sky-400 h-full rounded-full transition-all duration-500"
+              className="bg-sky-500 dark:bg-sky-400 h-full rounded-full transition-all duration-500"
               style={{ width: `${Math.min(100, Math.max(0, current.humidity))}%` }}
             />
           </div>
         </div>
 
         {/* Wind Speed Bento Card */}
-        <div className="p-5 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-[2rem] shadow-lg flex flex-col justify-between hover:border-indigo-500/40 transition-all">
+        <div className="p-5 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-lg flex flex-col justify-between hover:border-indigo-500/40 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Wind Speed</span>
-            <div className="w-8 h-8 rounded-xl bg-teal-500/15 flex items-center justify-center text-teal-400">
+            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Wind Speed</span>
+            <div className="w-8 h-8 rounded-xl bg-teal-500/15 flex items-center justify-center text-teal-600 dark:text-teal-400">
               <Wind className="w-4 h-4" />
             </div>
           </div>
           <div className="my-3">
-            <div className="text-3xl font-black text-white">
+            <div className="text-3xl font-black text-slate-900 dark:text-white">
               {windInfo.value}{' '}
-              <span className="text-xs font-semibold text-slate-400">{windInfo.unitLabel}</span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">{windInfo.unitLabel}</span>
             </div>
-            <p className="text-[11px] text-slate-400 font-medium mt-1">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-1">
               {current.windSpeed < 15 ? 'Gentle Breeze' : current.windSpeed < 30 ? 'Moderate Gusts' : 'Gale Wind'}
             </p>
           </div>
-          <div className="text-[10px] uppercase font-bold tracking-wider text-teal-400 bg-teal-500/10 px-2.5 py-1 rounded-full w-max border border-teal-500/20">
+          <div className="text-[10px] uppercase font-bold tracking-wider text-teal-600 dark:text-teal-400 bg-teal-500/10 px-2.5 py-1 rounded-full w-max border border-teal-500/20">
             Direct Vector
           </div>
         </div>
 
         {/* Pressure Bento Card */}
-        <div className="p-5 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-[2rem] shadow-lg flex flex-col justify-between hover:border-indigo-500/40 transition-all">
+        <div className="p-5 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-lg flex flex-col justify-between hover:border-indigo-500/40 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Pressure</span>
-            <div className="w-8 h-8 rounded-xl bg-indigo-500/15 flex items-center justify-center text-indigo-400">
+            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Pressure</span>
+            <div className="w-8 h-8 rounded-xl bg-indigo-500/15 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
               <Gauge className="w-4 h-4" />
             </div>
           </div>
           <div className="my-3">
-            <div className="text-3xl font-black text-white">
+            <div className="text-3xl font-black text-slate-900 dark:text-white">
               {current.surfacePressure ? Math.round(current.surfacePressure) : '--'}
-              <span className="text-xs font-semibold text-slate-400"> hPa</span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400"> hPa</span>
             </div>
-            <p className="text-[11px] text-slate-400 font-medium mt-1">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-1">
               {current.surfacePressure && current.surfacePressure > 1013 ? 'High Barometric' : 'Standard Air'}
             </p>
           </div>
-          <div className="text-[10px] uppercase font-bold tracking-wider text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full w-max border border-indigo-500/20">
+          <div className="text-[10px] uppercase font-bold tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-2.5 py-1 rounded-full w-max border border-indigo-500/20">
             Stable
           </div>
         </div>
 
         {/* UV Index Bento Card */}
-        <div className="p-5 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-[2rem] shadow-lg flex flex-col justify-between hover:border-indigo-500/40 transition-all">
+        <div className="p-5 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-lg flex flex-col justify-between hover:border-indigo-500/40 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">UV Index</span>
-            <div className="w-8 h-8 rounded-xl bg-amber-500/15 flex items-center justify-center text-amber-400">
+            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">UV Index</span>
+            <div className="w-8 h-8 rounded-xl bg-amber-500/15 flex items-center justify-center text-amber-600 dark:text-amber-400">
               <SunMedium className="w-4 h-4" />
             </div>
           </div>
           <div className="my-3">
-            <div className="text-3xl font-black text-white">
+            <div className="text-3xl font-black text-slate-900 dark:text-white">
               {current.uvIndex !== undefined ? current.uvIndex.toFixed(1) : '--'}
             </div>
             <p className="text-[11px] font-semibold mt-1">
               {current.uvIndex === undefined ? (
                 <span className="text-slate-400">No Data</span>
               ) : current.uvIndex < 3 ? (
-                <span className="text-emerald-400">Low Exposure</span>
+                <span className="text-emerald-600 dark:text-emerald-400">Low Exposure</span>
               ) : current.uvIndex < 6 ? (
-                <span className="text-amber-400">Moderate Exposure</span>
+                <span className="text-amber-600 dark:text-amber-400">Moderate Exposure</span>
               ) : (
-                <span className="text-rose-400">High Risk Protection</span>
+                <span className="text-rose-600 dark:text-rose-400">High Risk Protection</span>
               )}
             </p>
           </div>
-          <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+          <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full transition-all duration-500 ${
-                (current.uvIndex || 0) < 3 ? 'bg-emerald-400' : (current.uvIndex || 0) < 6 ? 'bg-amber-400' : 'bg-rose-500'
+                (current.uvIndex || 0) < 3 ? 'bg-emerald-500' : (current.uvIndex || 0) < 6 ? 'bg-amber-500' : 'bg-rose-500'
               }`}
               style={{ width: `${Math.min(100, ((current.uvIndex || 0) / 11) * 100)}%` }}
             />

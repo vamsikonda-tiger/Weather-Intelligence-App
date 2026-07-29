@@ -55,20 +55,20 @@ export const ForecastGrid: React.FC<ForecastGridProps> = ({
   const tempRange = overallMax - overallMin || 1;
 
   return (
-    <section className="mb-8 p-6 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-[2rem] shadow-xl">
+    <section className="mb-8 p-6 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-xl">
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
           <div className="p-2.5 bg-gradient-to-tr from-indigo-600 to-indigo-700 text-white rounded-2xl shadow-md shadow-indigo-500/20">
             <Calendar className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
               7-Day Forecast Matrix
-              <span className="text-[10px] uppercase font-bold text-indigo-300 bg-indigo-500/20 px-2 py-0.5 rounded-full border border-indigo-500/30">
+              <span className="text-[10px] uppercase font-bold text-indigo-600 dark:text-indigo-300 bg-indigo-500/10 dark:bg-indigo-500/20 px-2 py-0.5 rounded-full border border-indigo-500/20 dark:border-indigo-500/30">
                 Weekly Outlook
               </span>
             </h3>
-            <p className="text-xs text-slate-400 font-medium">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
               Click any day block to inspect specific daily advisory
             </p>
           </div>
@@ -89,16 +89,16 @@ export const ForecastGrid: React.FC<ForecastGridProps> = ({
               onClick={() => onSelectDay?.(index)}
               className={`p-4 rounded-[1.5rem] border transition-all cursor-pointer flex flex-col justify-between ${
                 isSelected
-                  ? 'bg-indigo-600/20 border-indigo-500 ring-2 ring-indigo-500/40 shadow-xl shadow-indigo-950/50'
-                  : 'bg-slate-950/80 hover:bg-slate-900 border-slate-800/80 shadow-md hover:border-indigo-500/40'
+                  ? 'bg-indigo-500/15 dark:bg-indigo-600/20 border-indigo-500 ring-2 ring-indigo-500/40 shadow-xl shadow-indigo-950/20 dark:shadow-indigo-950/50'
+                  : 'bg-slate-50/80 dark:bg-slate-950/80 hover:bg-slate-100 dark:hover:bg-slate-900 border-slate-200/80 dark:border-slate-800/80 shadow-md hover:border-indigo-500/40'
               }`}
             >
               {/* Day Header */}
               <div className="flex items-center justify-between sm:flex-col sm:items-start gap-1">
-                <span className="text-sm font-black text-white">
+                <span className="text-sm font-black text-slate-900 dark:text-white">
                   {item.dayName}
                 </span>
-                <span className="text-[11px] text-slate-400 font-medium">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
                   {new Date(item.date + 'T00:00:00').toLocaleDateString(undefined, {
                     month: 'short',
                     day: 'numeric',
@@ -108,40 +108,40 @@ export const ForecastGrid: React.FC<ForecastGridProps> = ({
 
               {/* Icon & Condition */}
               <div className="my-3 flex items-center justify-between sm:justify-center sm:flex-col gap-2">
-                <div className="p-2.5 bg-slate-900 rounded-2xl border border-slate-800">
+                <div className="p-2.5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
                   {renderWeatherIcon(condition.iconName)}
                 </div>
-                <span className="text-xs font-bold text-slate-300 text-center truncate max-w-[120px]">
+                <span className="text-xs font-bold text-slate-700 dark:text-slate-300 text-center truncate max-w-[120px]">
                   {condition.label}
                 </span>
               </div>
 
               {/* Rain Probability Badge */}
               <div className="mb-3">
-                <div className="flex items-center justify-between text-[11px] text-slate-400 mb-1">
-                  <span className="flex items-center gap-1 text-sky-400 font-semibold">
+                <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 mb-1">
+                  <span className="flex items-center gap-1 text-sky-600 dark:text-sky-400 font-semibold">
                     <CloudRain className="w-3 h-3" /> Rain
                   </span>
-                  <span className="font-extrabold text-white">
+                  <span className="font-extrabold text-slate-900 dark:text-white">
                     {item.precipitationProbability}%
                   </span>
                 </div>
-                <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                <div className="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
                   <div
-                    className="bg-sky-400 h-full rounded-full"
+                    className="bg-sky-500 dark:bg-sky-400 h-full rounded-full"
                     style={{ width: `${item.precipitationProbability}%` }}
                   />
                 </div>
               </div>
 
               {/* Temperature Bar */}
-              <div className="pt-2 border-t border-slate-800/80">
+              <div className="pt-2 border-t border-slate-200 dark:border-slate-800/80">
                 <div className="flex items-center justify-between text-xs font-black mb-1">
-                  <span className="text-rose-400">{formatTemp(item.tempMax, unit)}</span>
-                  <span className="text-sky-400">{formatTemp(item.tempMin, unit)}</span>
+                  <span className="text-rose-500 dark:text-rose-400">{formatTemp(item.tempMax, unit)}</span>
+                  <span className="text-sky-500 dark:text-sky-400">{formatTemp(item.tempMin, unit)}</span>
                 </div>
 
-                <div className="w-full bg-slate-800 h-2 rounded-full relative overflow-hidden">
+                <div className="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full relative overflow-hidden">
                   <div
                     className="absolute h-full bg-gradient-to-r from-sky-400 to-rose-400 rounded-full"
                     style={{

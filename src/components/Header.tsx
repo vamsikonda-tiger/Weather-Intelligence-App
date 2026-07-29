@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CloudSun, RefreshCw } from 'lucide-react';
+import { CloudSun, RefreshCw, Sun, Moon } from 'lucide-react';
 import { TemperatureUnit } from '../types';
 
 interface HeaderProps {
@@ -7,6 +7,8 @@ interface HeaderProps {
   onToggleUnit: (unit: TemperatureUnit) => void;
   onRefresh: () => void;
   isRefreshing?: boolean;
+  theme: 'light' | 'dark';
+  onToggleTheme: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -14,6 +16,8 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleUnit,
   onRefresh,
   isRefreshing = false,
+  theme,
+  onToggleTheme,
 }) => {
   const [timeStr, setTimeStr] = useState('');
 
@@ -32,27 +36,27 @@ export const Header: React.FC<HeaderProps> = ({
   }, []);
 
   return (
-    <header className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-[2rem] shadow-xl mb-6">
+    <header className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-xl mb-6 transition-colors duration-300">
       <div className="flex items-center gap-3.5">
         <div className="w-11 h-11 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/25 shrink-0">
           <CloudSun className="w-6 h-6 text-white" />
         </div>
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+          <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
             Skywise Intelligence
-            <span className="text-[10px] uppercase tracking-widest font-semibold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+            <span className="text-[10px] uppercase tracking-widest font-semibold px-2 py-0.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-500/20 dark:border-indigo-500/30">
               Bento AI
             </span>
           </h1>
-          <p className="text-xs text-slate-400 font-medium">Precision Weather Analytics</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Precision Weather Analytics</p>
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3.5">
         {/* Live Date / Time Readout */}
         <div className="hidden md:block text-right pr-2">
-          <p className="text-xs font-semibold text-slate-300">{timeStr}</p>
-          <p className="text-[10px] text-slate-500 uppercase tracking-widest font-mono">Live Sync</p>
+          <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">{timeStr}</p>
+          <p className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-widest font-mono">Live Sync</p>
         </div>
 
         {/* Refresh Button */}
@@ -61,20 +65,34 @@ export const Header: React.FC<HeaderProps> = ({
           onClick={onRefresh}
           disabled={isRefreshing}
           title="Refresh Weather Data"
-          className="p-2.5 rounded-2xl bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white transition-all border border-slate-700/60 disabled:opacity-50 cursor-pointer shadow-xs"
+          className="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-all border border-slate-200 dark:border-slate-700/60 disabled:opacity-50 cursor-pointer shadow-xs"
         >
-          <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-indigo-400' : ''}`} />
+          <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin text-indigo-500 dark:text-indigo-400' : ''}`} />
+        </button>
+
+        {/* Light / Dark Mode Toggle Button */}
+        <button
+          id="theme-toggle-btn"
+          onClick={onToggleTheme}
+          title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
+          className="p-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-all border border-slate-200 dark:border-slate-700/60 cursor-pointer shadow-xs flex items-center justify-center"
+        >
+          {theme === 'dark' ? (
+            <Sun className="w-4 h-4 text-amber-400" />
+          ) : (
+            <Moon className="w-4 h-4 text-indigo-600" />
+          )}
         </button>
 
         {/* Temperature Unit Switcher */}
-        <div className="flex items-center p-1 bg-slate-950/80 rounded-2xl border border-slate-800">
+        <div className="flex items-center p-1 bg-slate-100 dark:bg-slate-950/80 rounded-2xl border border-slate-200 dark:border-slate-800">
           <button
             id="unit-celsius-btn"
             onClick={() => onToggleUnit('celsius')}
             className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               unit === 'celsius'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                : 'text-slate-400 hover:text-slate-200'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
             }`}
           >
             °C
@@ -85,7 +103,7 @@ export const Header: React.FC<HeaderProps> = ({
             className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
               unit === 'fahrenheit'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                : 'text-slate-400 hover:text-slate-200'
+                : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
             }`}
           >
             °F

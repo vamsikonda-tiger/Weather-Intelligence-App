@@ -50,8 +50,8 @@ export const WeatherChart: React.FC<WeatherChartProps> = ({
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-slate-900/95 text-white p-3.5 rounded-2xl border border-slate-700 shadow-2xl backdrop-blur-xl text-xs">
-          <p className="font-bold text-slate-200 mb-2 border-b border-slate-800 pb-1">{label}</p>
+        <div className="bg-white/95 dark:bg-slate-900/95 text-slate-900 dark:text-white p-3.5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xl backdrop-blur-xl text-xs">
+          <p className="font-bold text-slate-800 dark:text-slate-200 mb-2 border-b border-slate-100 dark:border-slate-800 pb-1">{label}</p>
           {payload.map((entry: any, index: number) => (
             <div key={`item-${index}`} className="flex items-center justify-between gap-4 py-0.5">
               <span className="flex items-center gap-1.5 font-semibold" style={{ color: entry.color }}>
@@ -71,7 +71,7 @@ export const WeatherChart: React.FC<WeatherChartProps> = ({
   };
 
   return (
-    <section className="p-6 bg-slate-900/60 backdrop-blur-xl border border-slate-800 rounded-[2rem] shadow-xl mb-8">
+    <section className="p-6 bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200 dark:border-slate-800 rounded-[2rem] shadow-xl mb-8">
       {/* Chart Header & Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
@@ -79,20 +79,20 @@ export const WeatherChart: React.FC<WeatherChartProps> = ({
             <TrendingUp className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
               Atmospheric Trend Analytics
-              <span className="text-[10px] uppercase font-bold text-indigo-300 bg-indigo-500/20 px-2 py-0.5 rounded-full border border-indigo-500/30">
+              <span className="text-[10px] uppercase font-bold text-indigo-600 dark:text-indigo-300 bg-indigo-500/10 dark:bg-indigo-500/20 px-2 py-0.5 rounded-full border border-indigo-500/20 dark:border-indigo-500/30">
                 Visual Telemetry
               </span>
             </h3>
-            <p className="text-xs text-slate-400 font-medium">
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
               Interactive temperature progression and precipitation curves
             </p>
           </div>
         </div>
 
         {/* Chart View Selector Tabs */}
-        <div className="flex items-center p-1 bg-slate-950/80 rounded-2xl border border-slate-800 self-start sm:self-auto overflow-x-auto">
+        <div className="flex items-center p-1 bg-slate-100/80 dark:bg-slate-950/80 rounded-2xl border border-slate-200 dark:border-slate-800 self-start sm:self-auto overflow-x-auto">
           <button
             id="chart-tab-daily-temp"
             type="button"
@@ -100,7 +100,7 @@ export const WeatherChart: React.FC<WeatherChartProps> = ({
             className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
               activeTab === 'daily-temp'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                : 'text-slate-400 hover:text-slate-200'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
           >
             <TrendingUp className="w-3.5 h-3.5" />
@@ -114,7 +114,7 @@ export const WeatherChart: React.FC<WeatherChartProps> = ({
             className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
               activeTab === 'daily-rain'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                : 'text-slate-400 hover:text-slate-200'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
           >
             <Droplets className="w-3.5 h-3.5" />
@@ -128,7 +128,7 @@ export const WeatherChart: React.FC<WeatherChartProps> = ({
             className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
               activeTab === 'hourly-temp'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20'
-                : 'text-slate-400 hover:text-slate-200'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
           >
             <Clock className="w-3.5 h-3.5" />
